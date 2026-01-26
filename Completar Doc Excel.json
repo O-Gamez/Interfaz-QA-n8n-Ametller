@@ -1,0 +1,1060 @@
+{
+  "name": "Completar Doc Excel",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc",
+          "mode": "list",
+          "cachedResultName": "Pruebas e2e Ametller con n8n ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pruebas E2E(DEV) DESKTOP",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $json.body.ID }}",
+            "Nombre del Caso": "={{ $json.body[\"Nombre del Caso\"] }}",
+            "Area": "={{ $json.body.Area }}",
+            "Tipo de Pedido": "={{ $json.body[\"Tipo de Pedido\"] }}",
+            "Precondiciones": "={{ $json.body.Precondiciones }}",
+            "Pasos": "={{ $json.body.Pasos }}",
+            "Datos prueba": "={{ $json.body[\"Datos prueba\"] }}",
+            "Método de Pago": "={{ $json.body[\"Método de Pago\"] }}",
+            "Resultado Esperado": "={{ $json.body[\"Resultado Esperado\"] }}",
+            "Resultado Obtenido": "={{ $json.body[\"Resultado Obtenido\"] }}",
+            "Estado": "={{ $json.body.Estado }}",
+            "Evidencias": "={{ $json.body.Evidencias }}",
+            "Notas": "={{ $json.body.Notas }}",
+            "Fecha": "={{ $now.toFormat('dd-MM-yyyy') }}",
+            "Tester": "={{ $json.body.Tester }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre del Caso",
+              "displayName": "Nombre del Caso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Area",
+              "displayName": "Area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tipo de Pedido",
+              "displayName": "Tipo de Pedido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Precondiciones",
+              "displayName": "Precondiciones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Pasos",
+              "displayName": "Pasos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Datos prueba",
+              "displayName": "Datos prueba",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Método de Pago",
+              "displayName": "Método de Pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resultado Esperado",
+              "displayName": "Resultado Esperado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resultado Obtenido",
+              "displayName": "Resultado Obtenido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Evidencias",
+              "displayName": "Evidencias",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Notas",
+              "displayName": "Notas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tester",
+              "displayName": "Tester",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1520,
+        464
+      ],
+      "id": "eeaacf02-ff62-438d-8610-2718cdbc7a4e",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "r5mLYR3bF3LSd6xK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "caso-prueba/resultado",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1776,
+        464
+      ],
+      "id": "f581e5c3-1dc3-414f-91ba-a29045636118",
+      "name": "Recibir datos",
+      "webhookId": "4b260549-0b8d-424b-9c10-4e791464e4f6"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload-imagen",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*",
+          "binaryPropertyName": "data"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1760,
+        176
+      ],
+      "id": "749507d2-efe1-49d1-8b9f-10a285bf8190",
+      "name": "Recibir imagenes",
+      "webhookId": "67316d57-9fd5-4c61-9033-b131b76d0bdc"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "=data0",
+        "name": "={{ $json.ID }}-{{ $json['Nombre del Caso'] }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1bM4Q4zq1O5d6xXnIHaJGTKJU-G8Pwags",
+          "mode": "list",
+          "cachedResultName": "Evidencias UAT Ametller",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1bM4Q4zq1O5d6xXnIHaJGTKJU-G8Pwags"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1520,
+        176
+      ],
+      "id": "6c3fa49b-572c-41e6-9051-dc17bd6105af",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Rx7p1UKAXA8ckM2P",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Upload file').item.json.id }}",
+          "mode": "id"
+        },
+        "newUpdatedFileName": "=Test_{{ $json.ID }}-{{ $now.toFormat('dd-MM-yyyy') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -576,
+        160
+      ],
+      "id": "96396dfd-0ac1-4559-a500-244525baf8c8",
+      "name": "Update file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Rx7p1UKAXA8ckM2P",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        160
+      ],
+      "id": "ef98d58d-455e-4a22-892a-a81b81c74eba",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0b8073e5-2dfd-4bf6-8390-48dcf9d5d56c",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "OK",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1104,
+        176
+      ],
+      "id": "611d246b-0ef2-4157-a3e8-c6ebf8801e44",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc",
+          "mode": "list",
+          "cachedResultName": "Pruebas e2e Ametller con n8n ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pruebas E2E(DEV) DESKTOP",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1328,
+        176
+      ],
+      "id": "b7afe7c0-c6a4-4bc1-a7fc-a6f717a8cfb1",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "r5mLYR3bF3LSd6xK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"url\": \"{{ $('Upload file').item.json.webViewLink }}\",\n  \"miniatura\": \"{{ $('Upload file').item.json.thumbnailLink }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -352,
+        160
+      ],
+      "id": "115a4f44-ea96-497d-9784-3970a3ff3022",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc",
+          "mode": "list",
+          "cachedResultName": "Pruebas e2e Ametller con n8n ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pruebas E2E(DEV) DESKTOP",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1504,
+        -576
+      ],
+      "id": "da527707-f24e-47bf-bc59-953b3507fae4",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "r5mLYR3bF3LSd6xK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "lista-tests",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1744,
+        -576
+      ],
+      "id": "b0506b2f-2ee7-48e4-a9d7-7b2006bf726e",
+      "name": "Mandar lista Test",
+      "webhookId": "90ed9529-e625-4ea0-8ead-4a9ddb6a24dc"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -1296,
+        -576
+      ],
+      "id": "5f856300-ff60-4378-b875-65fbd4f60b76",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc",
+          "mode": "list",
+          "cachedResultName": "Pruebas e2e Ametller con n8n ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pruebas E2E(DEV) DESKTOP",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1488,
+        -784
+      ],
+      "id": "78e332e5-3a48-4615-bcd8-61a65ea85b43",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "r5mLYR3bF3LSd6xK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "estadisticas",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1728,
+        -784
+      ],
+      "id": "ee9ff4dc-2f54-4223-99b0-d84c267d2448",
+      "name": "Enviar Informe Estado",
+      "webhookId": "90ed9529-e625-4ea0-8ead-4a9ddb6a24dc"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener las filas del nodo anterior\nconst items = $input.all();\n\nlet ok = 0;\nlet ko = 0;\nlet bloqueado = 0;\nlet pendiente = 0;\n\nfor (const item of items) {\n  const estado = (item.json.Estado || \"\").toUpperCase().trim();\n  \n  if (estado === 'OK') ok++;\n  else if (estado === 'KO') ko++;\n  else if (estado === 'BLOQUEADO') bloqueado++;\n  else pendiente++; // Si está vacío o es otra cosa, es pendiente\n}\n\nreturn [{\n  json: { ok, ko, bloqueado, pendiente }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        -784
+      ],
+      "id": "bb641216-f7d5-4760-9256-a7693bdf071e",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -1072,
+        -784
+      ],
+      "id": "87b7a67d-8f7e-4f42-94f3-09c71cd03539",
+      "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "path": "iniciar",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "7c7cb985-6a51-4f41-a456-3215033808e8",
+      "name": "Mandar caso de prueba",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1760,
+        -272
+      ],
+      "webhookId": "ca358359-625b-4ae8-a327-4149ad03040e"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc",
+          "mode": "list",
+          "cachedResultName": "Pruebas e2e Ametller con n8n ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pruebas E2E(DEV) DESKTOP",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "a4bb9cfd-b114-4b98-8138-8032a8330494",
+      "name": "Get row(s) in sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1536,
+        -272
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "r5mLYR3bF3LSd6xK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0b8073e5-2dfd-4bf6-8390-48dcf9d5d56c",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "OK",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "bloqueado-condition-id",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "BLOQUEADO",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3121d15f-e4b9-43b7-8c4e-4e884edbe3a2",
+      "name": "Filtro: Pendientes",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1072,
+        -128
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ef544f4d-64a0-4b67-babd-da6805e86b55",
+      "name": "Limit",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Rol: Eres un Lead QA experto. Tu misión es dar 3 o 4 consejos tácticos y breves para ejecutar este test específico con máxima eficacia.\n\nDatos del caso:\nID: {{ $json.ID }}\nNombre: {{ $json['Nombre del Caso'] }}\nPrecondiciones: {{ $json.Precondiciones }}\nPasos: {{ $json.Pasos }}\nResultado Esperado: {{ $json['Resultado Esperado'] }}\n\nInstrucciones de formato (ESTRICTO):\n1. No saludes. Ve directo al grano.\n2. Usa una lista con guiones para cada punto.\n3. Usa negrita (envolviendo en doble asterisco **) solo para la palabra clave inicial de cada punto.\n4. Separa cada punto con un salto de línea.\n\nEjemplo de formato deseado:\n- **Datos Reales:** No uses 'test/test', usa un email con formato válido único.\n- **Sesión:** Verifica que la cookie de sesión se crea al finalizar.\n- **Error:** Intenta forzar el error enviando el formulario vacío primero.",
+        "options": {}
+      },
+      "id": "dd00d9f4-efd5-49cf-aba0-cad5d581cc1b",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -400,
+        -272
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-flash-lite-latest",
+        "options": {}
+      },
+      "id": "aa0f440f-010b-42f6-b786-e1c7dca20c4d",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -48
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "0dFjXFUkxHcaVfir",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Recuperamos datos del nodo \"Caso Seleccionado\" (que unifica los dos caminos)\nconst datosDelCaso = $('Caso Seleccionado').first().json;\n\n// Recuperamos el consejo de la IA\nconst consejoIA = items[0].json.text || items[0].json.content || items[0].json.output || items[0].json.message || \"\";\n\nreturn [\n  {\n    json: {\n      ...datosDelCaso,\n      \"Consejo para el Test\": consejoIA\n    }\n  }\n];"
+      },
+      "id": "5ffaaf86-f7d7-4ec3-89b0-296d0713a33c",
+      "name": "Merge Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -64,
+        -272
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "1c9e5b0b-1e9f-43b3-ba7d-fe5057c90fca",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        160,
+        -272
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "18029999-0df2-4299-906d-749e79434863",
+              "leftValue": "={{ $('Mandar caso de prueba').item.json.query.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "69392c60-8575-4b88-ab34-a04733622793",
+      "name": "¿Viene ID?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1312,
+        -272
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a6a62723-9cbf-4809-b7b2-328afc221e06",
+              "leftValue": "={{ $json.ID }}",
+              "rightValue": "={{ $('Mandar caso de prueba').item.json.query.id }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "01361dbb-1cfd-45fa-b757-fbded469383a",
+      "name": "Filtro: ID Especifico",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1056,
+        -368
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ef6c6685-5758-4887-9fe7-d4293910b9d4",
+      "name": "Caso Seleccionado",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -624,
+        -272
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Recibir datos": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recibir imagenes": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "Update file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update file": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mandar lista Test": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Informe Estado": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mandar caso de prueba": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "¿Viene ID?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Viene ID?": {
+      "main": [
+        [
+          {
+            "node": "Filtro: ID Especifico",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filtro: Pendientes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtro: Pendientes": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Caso Seleccionado",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Filtro: ID Especifico": {
+      "main": [
+        [
+          {
+            "node": "Caso Seleccionado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Caso Seleccionado": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Data": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fd5f1a17-6b94-408d-b1c2-1e07719b887e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "061fe5519bb5240059ba1803b30953e9cb8a3c58ae340ce6c46dd74e1aa70654"
+  },
+  "id": "43uUzgf78ev8KuQV",
+  "tags": []
+}
