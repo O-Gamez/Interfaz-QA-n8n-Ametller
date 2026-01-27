@@ -22,7 +22,7 @@ export default function TestSelector({
             {/* 1. TOP BAR: Title & Actions */}
             <div className="header-top">
                 <div className="brand">
-                    <h1>**QA VISEO** UAT <span className="version">v2.1</span></h1>
+                    <h1>**QA VISEO UAT AMETLLER**</h1>
                     <div className="tester-info">Tester: <span>{tester}</span></div>
                 </div>
 
