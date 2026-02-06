@@ -1,22 +1,34 @@
 'use client';
 
 import { useState } from 'react';
+import { verificarPassword } from '../app/actions'; // 1. Importamos la acción
 
 export default function LoginScreen({ onLoginSuccess }) {
   const [passwordInput, setPasswordInput] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const [loading, setLoading] = useState(false); // Nuevo estado para feedback visual
 
-  const ACCESS_PASSWORD = process.env.NEXT_PUBLIC_ACCESS_PASSWORD;
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => { // 2. Hacemos la función async
     e.preventDefault();
-    if (passwordInput === ACCESS_PASSWORD) {
-      onLoginSuccess();
-      setLoginError('');
-    } else {
-      setLoginError("⛔ Contraseña incorrecta");
-      setPasswordInput('');
+    setLoading(true);
+    setLoginError('');
+
+    try {
+      // 3. Llamamos al servidor. El navegador envía el texto, el servidor dice sí/no.
+      // La contraseña real NUNCA baja al navegador.
+      const isValid = await verificarPassword(passwordInput);
+
+      if (isValid) {
+        onLoginSuccess();
+      } else {
+        setLoginError("⛔ Contraseña incorrecta");
+        setPasswordInput('');
+      }
+    } catch (error) {
+      setLoginError("⚠️ Error de conexión");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,6 +46,7 @@ export default function LoginScreen({ onLoginSuccess }) {
               onChange={(e) => setPasswordInput(e.target.value)} 
               style={{textAlign: 'center', fontSize: '1.5rem', letterSpacing: showPassword ? '2px' : '8px', height: '50px', paddingRight: '45px', width: '100%'}} 
               autoFocus 
+              disabled={loading} // Desactivar mientras verifica
               suppressHydrationWarning={true}
             />
             <button type="button" onClick={() => setShowPassword(!showPassword)} style={{position: 'absolute', right: '10px', background: 'none', border: 'none', cursor: 'pointer', padding: '5px', color: '#a1a1aa', display: 'flex', alignItems: 'center'}}>
@@ -41,7 +54,10 @@ export default function LoginScreen({ onLoginSuccess }) {
             </button>
           </div>
           {loginError && <div style={{color: 'var(--danger)', marginBottom: '15px', fontWeight:'bold', fontSize: '0.9rem'}}>{loginError}</div>}
-          <button type="submit" className="btn-primary" style={{width: '100%', justifyContent: 'center'}}>DESBLOQUEAR 🔓</button>
+          
+          <button type="submit" className="btn-primary" style={{width: '100%', justifyContent: 'center'}} disabled={loading}>
+            {loading ? "VERIFICANDO..." : "DESBLOQUEAR 🔓"}
+          </button>
         </form>
       </div>
     </div>
