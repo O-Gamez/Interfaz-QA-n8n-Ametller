@@ -12,7 +12,7 @@
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
         },
         "sheetName": {
-          "value": "={{ $json.body.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : 'Pruebas E2E(DEV) DESKTOP' }}",
+          "value": "={{ $json.body.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : $json.body.device === 'global' ? 'Pruebas Globales' : 'Pruebas E2E(DEV) DESKTOP' }}",
           "mode": "name"
         },
         "columns": {
@@ -363,7 +363,7 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": "={{ $('Recibir imagenes').item.json.body.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : 'Pruebas E2E(DEV) DESKTOP' }}",
+          "value": "={{ $('Recibir imagenes').item.json.body.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : $('Recibir imagenes').item.json.body.device === 'global' ? 'Pruebas Globales' : 'Pruebas E2E(DEV) DESKTOP' }}",
           "mode": "name"
         },
         "options": {}
@@ -408,7 +408,7 @@
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
         },
         "sheetName": {
-          "value": "={{ $json.query.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : 'Pruebas E2E(DEV) DESKTOP' }}",
+          "value": "={{ $json.query.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : $json.query.device === 'global' ? 'Pruebas Globales' : 'Pruebas E2E(DEV) DESKTOP' }}",
           "mode": "name"
         },
         "options": {}
@@ -468,7 +468,7 @@
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
         },
         "sheetName": {
-          "value": "={{ $json.query.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : 'Pruebas E2E(DEV) DESKTOP' }}",
+          "value": "={{ $json.query.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : $json.query.device === 'global' ? 'Pruebas Globales' : 'Pruebas E2E(DEV) DESKTOP' }}",
           "mode": "name"
         },
         "options": {}
@@ -558,7 +558,7 @@
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Sl8XexFBDaoHNEAUEqnIH5ZSaaNuL_mZfyBI0LenRc/edit?usp=drivesdk"
         },
         "sheetName": {
-          "value": "={{ $json.query.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : 'Pruebas E2E(DEV) DESKTOP' }}",
+          "value": "={{ $json.query.device === 'mobile' ? 'Pruebas E2E(DEV) MOBILE' : $json.query.device === 'global' ? 'Pruebas Globales' : 'Pruebas E2E(DEV) DESKTOP' }}",
           "mode": "name"
         },
         "options": {}

@@ -14,8 +14,10 @@ export default function TestSelector({
     setDevice,
     filterArea,
     setFilterArea,
-    uniqueAreas
+    uniqueAreas,
+    onChangeTester
 }) {
+
     return (
         <header className="header">
 
@@ -23,8 +25,26 @@ export default function TestSelector({
             <div className="header-top">
                 <div className="brand">
                     <h1>**QA VISEO UAT AMETLLER**</h1>
-                    <div className="tester-info">Tester: <span>{tester}</span></div>
+                    <div className="tester-info" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        Tester: <span>{tester}</span>
+                        <button 
+                            onClick={onChangeTester}
+                            title="Cambiar tester"
+                            style={{ 
+                                background: 'transparent', 
+                                border: 'none', 
+                                cursor: 'pointer',
+                                padding: '2px',
+                                fontSize: '14px',
+                                lineHeight: '1'
+                            }}
+                        >
+                            ✏️
+                        </button>
+                    </div>
+
                 </div>
+
 
                 {/* DEVICE TABS (CENTERED/PROMINENT) */}
                 <div className="device-tabs">
@@ -40,7 +60,14 @@ export default function TestSelector({
                     >
                         📱 MOBILE
                     </button>
+                    <button
+                        className={`tab-btn ${device === 'global' ? 'active' : ''}`}
+                        onClick={() => setDevice('global')}
+                    >
+                        🌐 GLOBAL
+                    </button>
                 </div>
+
 
                 <div className="actions">
                     <button className="btn-secondary btn-sm" onClick={fetchStats}>📊 Stats</button>

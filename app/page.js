@@ -41,12 +41,14 @@ export default function Home() {
   const [statsData, setStatsData] = useState(null);
 
   // New states for filters
-  const [device, setDevice] = useState('desktop'); // desktop | mobile
+  const [device, setDevice] = useState('desktop'); // desktop | mobile | global
+
   const [filterArea, setFilterArea] = useState('');
   const [uniqueAreas, setUniqueAreas] = useState([]);
 
   const [previewImages, setPreviewImages] = useState([]);
   const fileInputRef = useRef(null);
+  const prevDeviceRef = useRef(device);
 
   const [formData, setFormData] = useState({
     resultado: '',
@@ -76,14 +78,68 @@ export default function Home() {
       setTester(savedTester);
     }
 
+    // Cargar dispositivo guardado
+    const savedDevice = localStorage.getItem("device") || 'desktop';
+    setDevice(savedDevice);
+    prevDeviceRef.current = savedDevice;
+
     const savedCase = localStorage.getItem("currentCase");
     const savedForm = localStorage.getItem("currentForm");
     const savedPreviews = localStorage.getItem("currentPreviews");
 
     if (savedCase) {
-      setCaso(JSON.parse(savedCase));
+      const casoData = JSON.parse(savedCase);
+      setCaso(casoData);
       if (savedForm) setFormData(JSON.parse(savedForm));
-      if (savedPreviews) setPreviewImages(JSON.parse(savedPreviews));
+
+      // Cargar miniaturas existentes del caso si hay evidencias
+      let existingPreviews = [];
+      const evidencias = casoData["Evidencias"];
+      if (evidencias) {
+        let urls = [];
+        if (typeof evidencias === 'string') {
+          urls = evidencias.split('\n').map(line => line.trim()).filter(line => line);
+        } else if (Array.isArray(evidencias)) {
+          urls = evidencias.filter(url => url && url.trim());
+        }
+        existingPreviews = urls.map(url => {
+          let miniatura = url;
+          // Si es un enlace de Google Drive, extraer el ID y usar enlace directo para imagen
+          const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+          if (match) {
+            const fileId = match[1];
+            miniatura = `https://drive.google.com/uc?id=${fileId}`;
+          }
+          return { original: url, miniatura };
+        });
+      }
+
+      // Combinar con previews guardados si existen (evitar duplicados)
+      if (savedPreviews) {
+        const saved = JSON.parse(savedPreviews);
+        const uniqueUrls = new Set();
+        const combined = [];
+        
+        // Primero agregar los existentes del caso
+        existingPreviews.forEach(img => {
+          if (!uniqueUrls.has(img.original)) {
+            uniqueUrls.add(img.original);
+            combined.push(img);
+          }
+        });
+        
+        // Luego agregar los guardados que no existan ya
+        saved.forEach(img => {
+          if (!uniqueUrls.has(img.original)) {
+            uniqueUrls.add(img.original);
+            combined.push(img);
+          }
+        });
+        
+        existingPreviews = combined;
+      }
+
+      setPreviewImages(existingPreviews);
       showStatus("🔄 Sesión restaurada", "neutral");
     }
   }, [isLoggedIn]);
@@ -95,7 +151,18 @@ export default function Home() {
       // Reset selectors when device changes
       setSelectedTestId('');
       setFilterArea('');
-      setCaso(null);
+      // Only clear case if device actually changed
+      if (prevDeviceRef.current !== device) {
+        setCaso(null);
+        setPreviewImages([]);
+        setFormData({ resultado: '', estado: '', evidencias: '', notas: '' });
+        // Clear localStorage for case when device changes
+        localStorage.removeItem("currentCase");
+        localStorage.removeItem("currentForm");
+        localStorage.removeItem("currentPreviews");
+      }
+
+      prevDeviceRef.current = device;
     }
   }, [device, isLoggedIn]);
 
@@ -105,6 +172,11 @@ export default function Home() {
       localStorage.setItem("currentPreviews", JSON.stringify(previewImages));
     }
   }, [formData, caso, isLoggedIn, previewImages]);
+
+  // Guardar dispositivo cuando cambia
+  useEffect(() => {
+    localStorage.setItem("device", device);
+  }, [device]);
 
   // --- FUNCIONES API ---
   const fetchList = async () => {
@@ -163,6 +235,14 @@ export default function Home() {
     localStorage.removeItem("isAuth");
     setIsLoggedIn(false);
   };
+
+  const handleChangeTester = () => {
+    const newTester = prompt("👤 Introduce el nuevo nombre del Tester:") || "Tester Anónimo";
+    localStorage.setItem("tester", newTester);
+    setTester(newTester);
+    showStatus(`✅ Tester cambiado a: ${newTester}`, "success");
+  };
+
 
   const showStatus = (msg, type = 'neutral') => {
     setStatus(msg);
@@ -300,7 +380,21 @@ export default function Home() {
         evidencias: '',
         notas: casoData["Notas"] || ''
       });
-      setPreviewImages([]);
+
+      // Cargar miniaturas existentes si hay evidencias
+      let existingPreviews = [];
+      const evidencias = casoData["Evidencias"];
+      if (evidencias) {
+        let urls = [];
+        if (typeof evidencias === 'string') {
+          urls = evidencias.split('\n').map(line => line.trim()).filter(line => line);
+        } else if (Array.isArray(evidencias)) {
+          urls = evidencias.filter(url => url && url.trim());
+        }
+        existingPreviews = urls.map(url => ({ original: url, miniatura: url }));
+      }
+      setPreviewImages(existingPreviews);
+      localStorage.setItem("currentPreviews", JSON.stringify(existingPreviews));
 
       showStatus("✅ Caso cargado y listo", "success");
     } catch (err) {
@@ -395,7 +489,9 @@ export default function Home() {
         filterArea={filterArea}
         setFilterArea={setFilterArea}
         uniqueAreas={uniqueAreas}
+        onChangeTester={handleChangeTester}
       />
+
 
       <TipSection caso={caso} />
 

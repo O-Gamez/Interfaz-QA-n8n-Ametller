@@ -7,7 +7,8 @@ export default function TipSection({ caso }) {
         <div className="tip-box">
             <div className="tip-icon">💡</div>
             <div className="tip-content">
-                <div className="tip-title">Consejo para el Test</div>
+                <div className="tip-title">Consejo generado con IA</div>
+
                 <div className="tip-text">
                     {caso["Consejo para el Test"].split('\n').map((line, i) => {
                         if (!line.trim()) return null;
