@@ -3,12 +3,12 @@
 export async function verificarPassword(password) {
   const correcta = process.env.ACCESS_PASSWORD;
 
-  // --- DEBUGGING (MIRA TU TERMINAL DE VS CODE AL DARLE A LOGIN) ---
+  
   console.log("-------------------------------------");
   console.log("🔑 Password escrita por ti:", password);
   console.log("🔒 Password leída del .env:", correcta);
   console.log("-------------------------------------");
-  // ----------------------------------------------------------------
+
 
   // Pequeña pausa de seguridad
   await new Promise(resolve => setTimeout(resolve, 500));
