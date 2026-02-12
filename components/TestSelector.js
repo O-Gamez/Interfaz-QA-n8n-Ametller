@@ -105,7 +105,9 @@ export default function TestSelector({
                         {testList.map((t) => {
                             const estado = t.Estado ? t.Estado.toUpperCase().trim() : "PENDIENTE";
                             let icono = "⬜";
-                            if (estado === "OK") icono = "✅";
+                            if (estado === "OK-UAT") icono = "✅";
+                            if (estado === "OK-FINAL") icono = "✨";
+                            if (estado === "READY TO TEST") icono = "📝";
                             if (estado === "KO") icono = "❌";
                             if (estado === "BLOQUEADO") icono = "⛔";
 
@@ -115,6 +117,7 @@ export default function TestSelector({
                                 </option>
                             );
                         })}
+
                     </select>
                 </div>
 

@@ -210,14 +210,23 @@ export default function Home() {
       const data = await res.json();
 
       setStatsData({
-        labels: ['OK', 'KO', 'Bloqueado', 'Pendiente'],
+        labels: ['Ready to test', 'OK-UAT', 'OK-FINAL', 'KO', 'Bloqueado', 'Pendiente'],
         datasets: [{
-          data: [data.ok || 0, data.ko || 0, data.bloqueado || 0, data.pendiente || 0],
-          backgroundColor: ['#10b981', '#ef4444', '#f59e0b', '#27272a'],
+          data: [
+            data.readyToTest || data['Ready to test'] || 0, 
+            data.okUat || data['OK-UAT'] || 0, 
+            data.okFinal || data['OK-FINAL'] || 0, 
+            data.ko || 0, 
+            data.bloqueado || 0,
+            data.pendiente || 0
+          ],
+          backgroundColor: ['#3b82f6', '#10b981', '#059669', '#ef4444', '#f59e0b', '#6b7280'],
           borderColor: '#18181b',
           borderWidth: 2,
         }],
       });
+
+
       setShowStats(true);
       showStatus("");
     } catch (e) {
@@ -337,9 +346,10 @@ export default function Home() {
         // 1. Aplicar filtro de area si existe
         if (filterArea && t.Area !== filterArea) return false;
 
-        // 2. Buscar uno que no esté OK (Pendiente, KO, etc)
+        // 2. Buscar uno que no esté completado (OK-UAT, OK-FINAL, BLOQUEADO)
         const estado = (t.Estado || "").toUpperCase().trim();
-        return estado !== "OK" && estado !== "BLOQUEADO";
+        return estado !== "OK-UAT" && estado !== "OK-FINAL" && estado !== "BLOQUEADO";
+
       });
 
       if (pendingTest) {
@@ -374,7 +384,13 @@ export default function Home() {
       setCaso(casoData);
       localStorage.setItem("currentCase", JSON.stringify(casoData));
 
+      // Mostrar info si el caso ya está completado
+      if (casoData.Tester && casoData.Fecha) {
+        showStatus(`📋 Caso completado por ${casoData.Tester} el ${casoData.Fecha}`, "success");
+      }
+
       setFormData({
+
         resultado: casoData["Resultado Obtenido"] || '',
         estado: casoData["Estado"] || '',
         evidencias: '',
@@ -415,6 +431,41 @@ export default function Home() {
       const urlsImagenes = previewImages.map(img => img.original).join('\n');
       const evidenciasFinales = (urlsImagenes + '\n\n' + formData.evidencias).trim();
 
+      // Construir historial de fechas - añadir nueva fecha al historial existente (formato DD-MM-YYYY)
+      const hoy = new Date();
+      const nuevaFecha = `${String(hoy.getDate()).padStart(2, '0')}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${hoy.getFullYear()}`;
+
+      // DEBUG: Ver qué valores tenemos
+      console.log('Enviar - caso.Fecha existente:', caso.Fecha);
+      console.log('Enviar - nuevaFecha:', nuevaFecha);
+
+      // IMPORTANTE: Siempre añadir el nuevo valor, incluso si parece duplicado
+      // para mantener la misma cantidad de entradas que Estado Historial
+      const fechaExistente = caso.Fecha || "";
+      const fechaHistorial = fechaExistente 
+        ? `${fechaExistente} | ${nuevaFecha}`
+        : nuevaFecha;
+
+      // Construir historial de testers - SIEMPRE añadir nuevo tester al historial
+      const testerExistente = caso.Tester || "";
+      const testerHistorial = testerExistente
+        ? `${testerExistente} | ${tester}`
+        : tester;
+
+      // Construir historial de estados - SIEMPRE añadir al historial existente
+      const estadoHistorialExistente = caso["Estado Historial"] || caso.Estado || "";
+      const estadoHistorial = estadoHistorialExistente
+        ? `${estadoHistorialExistente} | ${formData.estado}`
+        : formData.estado;
+
+
+
+      console.log('Enviar - fechaHistorial:', fechaHistorial);
+      console.log('Enviar - testerHistorial:', testerHistorial);
+      console.log('Enviar - estadoHistorial:', estadoHistorial);
+
+
+
       const payload = {
         row_number: caso.row_number,
         ID: caso.ID,
@@ -429,12 +480,17 @@ export default function Home() {
         "Consejo para el Test": caso["Consejo para el Test"] || "",
         "Resultado Obtenido": formData.resultado,
         Estado: formData.estado,
+        "Estado Historial": estadoHistorial,
         Evidencias: evidenciasFinales,
         Notas: formData.notas,
-        Tester: tester,
-        Fecha: new Date().toISOString().split("T")[0],
+        Tester: testerHistorial,
+        Fecha: fechaHistorial,
         device: device // Also send device so backend knows where to write
+
+
+
       };
+
 
       const res = await fetch(URL_POST, {
         method: "POST",
@@ -446,6 +502,17 @@ export default function Home() {
 
       showStatus("🎉 Reporte enviado con éxito", "success");
 
+      // Actualizar inmediatamente el estado en la lista local para reflejar el cambio de icono
+      if (caso && caso.ID) {
+        setTestList(prevList => 
+          prevList.map(t => 
+            t.ID === caso.ID 
+              ? { ...t, Estado: formData.estado }
+              : t
+          )
+        );
+      }
+
       localStorage.removeItem("currentCase");
       localStorage.removeItem("currentForm");
       localStorage.removeItem("currentPreviews");
@@ -453,8 +520,13 @@ export default function Home() {
       setPreviewImages([]);
       setFormData({ resultado: '', estado: '', evidencias: '', notas: '' });
 
-      fetchList();
+      // No recargar lista inmediatamente para evitar que n8n sobrescriba el estado local
+      // La lista se actualizará cuando se cambie de dispositivo o manualmente
       setTimeout(() => setCaso(null), 1000);
+
+
+
+
 
     } catch (err) {
       showStatus("❌ Fallo al enviar el reporte", "error");
