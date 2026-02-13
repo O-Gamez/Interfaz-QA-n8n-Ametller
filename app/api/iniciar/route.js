@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 // 🔴 Asegúrate de que esta es la URL de tu Webhook "Iniciar" de n8n
-const N8N_WEBHOOK_URL = "https://phonogramic-supersafe-alfonzo.ngrok-free.dev/webhook/iniciar";
+const N8N_WEBHOOK_URL = "https://oskitas03.qamezia.com/webhook/iniciar";
 
 export async function GET(request) {
   try {

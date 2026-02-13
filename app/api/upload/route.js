@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   // OJO: Esta URL es la de tu Webhook de subida
-  const N8N_UPLOAD_URL = "https://phonogramic-supersafe-alfonzo.ngrok-free.dev/webhook/upload-imagen"; 
+  const N8N_UPLOAD_URL = "https://oskitas03.qamezia.com/webhook/upload-imagen"; 
 
   try {
     const formData = await request.formData();

@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 // 🔴 CAMBIA ESTO POR TU WEBHOOK DE N8N QUE DEVUELVE LA LISTA DE TESTS
-const N8N_LIST_URL = "https://phonogramic-supersafe-alfonzo.ngrok-free.dev/webhook/lista-tests";
+const N8N_LIST_URL = "https://oskitas03.qamezia.com/webhook/lista-tests";
 
 export async function GET(request) {
   try {

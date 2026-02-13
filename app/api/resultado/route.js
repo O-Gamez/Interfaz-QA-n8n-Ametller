@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
-  const TARGET_URL = "https://phonogramic-supersafe-alfonzo.ngrok-free.dev/webhook/caso-prueba/resultado";
+  const TARGET_URL = "https://oskitas03.qamezia.com/webhook/caso-prueba/resultado";
   try {
     let body;
     try { body = await request.json(); } 

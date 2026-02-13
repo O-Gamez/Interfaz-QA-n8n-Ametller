@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 // 🔴 CAMBIA ESTO POR TU WEBHOOK DE N8N QUE DEVUELVE LAS ESTADÍSTICAS
-const N8N_STATS_URL = "https://phonogramic-supersafe-alfonzo.ngrok-free.dev/webhook/estadisticas";
+const N8N_STATS_URL = "https://oskitas03.qamezia.com/webhook/estadisticas";
 
 export async function GET(request) {
   try {
