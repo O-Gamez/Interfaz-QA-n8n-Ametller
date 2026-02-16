@@ -274,9 +274,10 @@ export default function Home() {
     setUploading(true);
     showStatus(`📤 Subiendo ${file.name}...`, "loading");
 
-    const body = new FormData();
+  const body = new FormData();
     body.append('file', file);
     body.append('device', device); // Send device info for sheet selection
+    body.append('ID', caso?.ID || ''); // Send test ID explicitly for n8n workflow
     const extension = file.name.split('.').pop();
     const nombreArchivo = `${caso?.ID || 'General'}_${Date.now()}.${extension}`;
     body.append('filename', nombreArchivo);
