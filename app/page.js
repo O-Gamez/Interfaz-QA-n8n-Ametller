@@ -22,7 +22,19 @@ const URL_STATS = process.env.NEXT_PUBLIC_API_URL_STATS || "/api/stats";
 const URL_POST = process.env.NEXT_PUBLIC_API_URL_POST || "/api/resultado";
 const URL_UPLOAD = process.env.NEXT_PUBLIC_API_URL_UPLOAD || "/api/upload";
 
+// --- UTILIDADES ---
+// Función para verificar si una cadena es una URL válida
+const isValidUrl = (string) => {
+  if (!string || typeof string !== 'string') return false;
+  const trimmed = string.trim();
+  if (!trimmed) return false;
+  // Patrón simple para detectar URLs (http, https, ftp, drive.google.com, etc.)
+  const urlPattern = /^(https?:\/\/|ftp:\/\/|www\.)|([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/|$)/i;
+  return urlPattern.test(trimmed);
+};
+
 export default function Home() {
+
   // --- ESTADOS AUTH ---
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -97,14 +109,28 @@ export default function Home() {
 
       // Cargar miniaturas existentes del caso si hay evidencias
       let existingPreviews = [];
+      let textNotes = '';
       const evidencias = casoData["Evidencias"];
       if (evidencias) {
-        let urls = [];
+        let lines = [];
         if (typeof evidencias === 'string') {
-          urls = evidencias.split('\n').map(line => line.trim()).filter(line => line);
+          lines = evidencias.split('\n').map(line => line.trim()).filter(line => line);
         } else if (Array.isArray(evidencias)) {
-          urls = evidencias.filter(url => url && url.trim());
+          lines = evidencias.filter(line => line && line.trim());
         }
+        
+        // Separar URLs de texto
+        const urls = [];
+        const textLines = [];
+        lines.forEach(line => {
+          if (isValidUrl(line)) {
+            urls.push(line);
+          } else {
+            textLines.push(line);
+          }
+        });
+        
+        // Crear previews solo para URLs
         existingPreviews = urls.map(url => {
           let miniatura = url;
           // Si es un enlace de Google Drive, extraer el ID y usar enlace directo para imagen
@@ -115,7 +141,11 @@ export default function Home() {
           }
           return { original: url, miniatura };
         });
+        
+        // Guardar líneas de texto para el campo evidencias
+        textNotes = textLines.join('\n');
       }
+
 
       // Combinar con previews guardados si existen (evitar duplicados)
       if (savedPreviews) {
@@ -402,28 +432,47 @@ export default function Home() {
         showStatus(`📋 Caso completado por ${casoData.Tester} el ${casoData.Fecha}`, "success");
       }
 
-      setFormData({
+      // Procesar evidencias para separar URLs de texto
+      let existingPreviews = [];
+      let textNotes = '';
+      const evidencias = casoData["Evidencias"];
+      if (evidencias) {
+        let lines = [];
+        if (typeof evidencias === 'string') {
+          lines = evidencias.split('\n').map(line => line.trim()).filter(line => line);
+        } else if (Array.isArray(evidencias)) {
+          lines = evidencias.filter(line => line && line.trim());
+        }
+        
+        // Separar URLs de texto
+        const urls = [];
+        const textLines = [];
+        lines.forEach(line => {
+          if (isValidUrl(line)) {
+            urls.push(line);
+          } else {
+            textLines.push(line);
+          }
+        });
+        
+        // Crear previews solo para URLs
+        existingPreviews = urls.map(url => ({ original: url, miniatura: url }));
+        
+        // Guardar líneas de texto para el campo evidencias
+        textNotes = textLines.join('\n');
+      }
 
+      setFormData({
         resultado: casoData["Resultado Obtenido"] || '',
         estado: casoData["Estado"] || '',
-        evidencias: '',
+        evidencias: textNotes,
         notas: casoData["Notas"] || ''
       });
 
-      // Cargar miniaturas existentes si hay evidencias
-      let existingPreviews = [];
-      const evidencias = casoData["Evidencias"];
-      if (evidencias) {
-        let urls = [];
-        if (typeof evidencias === 'string') {
-          urls = evidencias.split('\n').map(line => line.trim()).filter(line => line);
-        } else if (Array.isArray(evidencias)) {
-          urls = evidencias.filter(url => url && url.trim());
-        }
-        existingPreviews = urls.map(url => ({ original: url, miniatura: url }));
-      }
       setPreviewImages(existingPreviews);
+
       localStorage.setItem("currentPreviews", JSON.stringify(existingPreviews));
+
 
       showStatus("✅ Caso cargado y listo", "success");
     } catch (err) {

@@ -268,42 +268,42 @@ export default function ReportForm({
                         </div>
                     )}
 
-                    {/* MINIATURAS + TEXTO */}
+                    {/* MINIATURAS */}
                     {previewImages.length > 0 && (
-                        <>
-                            <div className="thumbs-container">
-                                {previewImages.map((imgData, index) => (
-                                    <div key={index} className="thumb-item">
-                                        <button
-                                            className="btn-remove"
-                                            onClick={(e) => { e.stopPropagation(); removeImage(index); }}
-                                            title="Borrar"
-                                        >X</button>
-                                        <a href={imgData.original} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                                            <img
-                                                src={imgData.miniatura}
-                                                className="thumb-img"
-                                                alt="Evidencia"
-                                                referrerPolicy="no-referrer"
-                                                onError={(e) => {
-                                                    e.target.style.display = 'none';
-                                                    e.target.parentElement.innerHTML = '<div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:#a1a1aa;font-size:24px;">📄</div>';
-                                                }}
-                                            />
-                                        </a>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <textarea
-                                name="evidencias"
-                                value={formData.evidencias}
-                                onChange={handleChange}
-                                className="notes-textarea"
-                                placeholder="Añadir notas adicionales sobre las evidencias..."
-                            />
-                        </>
+                        <div className="thumbs-container">
+                            {previewImages.map((imgData, index) => (
+                                <div key={index} className="thumb-item">
+                                    <button
+                                        className="btn-remove"
+                                        onClick={(e) => { e.stopPropagation(); removeImage(index); }}
+                                        title="Borrar"
+                                    >X</button>
+                                    <a href={imgData.original} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                        <img
+                                            src={imgData.miniatura}
+                                            className="thumb-img"
+                                            alt="Evidencia"
+                                            referrerPolicy="no-referrer"
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                                e.target.parentElement.innerHTML = '<div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:#a1a1aa;font-size:24px;">📄</div>';
+                                            }}
+                                        />
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
                     )}
+
+                    {/* TEXTO - Siempre visible */}
+                    <textarea
+                        name="evidencias"
+                        value={formData.evidencias}
+                        onChange={handleChange}
+                        className="notes-textarea"
+                        placeholder="Añadir notas adicionales sobre las evidencias..."
+                    />
+
                 </div>
                 <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept="image/*" multiple onChange={handleManualSelect} />
             </div>
