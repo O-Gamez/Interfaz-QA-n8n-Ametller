@@ -15,7 +15,11 @@ export default function TestSelector({
     filterArea,
     setFilterArea,
     uniqueAreas,
+    filterEstado,
+    setFilterEstado,
+    uniqueEstados,
     onChangeTester
+
 }) {
 
     return (
@@ -92,7 +96,23 @@ export default function TestSelector({
                     </select>
                 </div>
 
+                {/* Estado Filter */}
+                <div className="filter-group">
+                    <label>Filtrar Estado:</label>
+                    <select
+                        className="test-selector estado-select"
+                        value={filterEstado}
+                        onChange={(e) => setFilterEstado(e.target.value)}
+                    >
+                        <option value="">-- Todos --</option>
+                        {uniqueEstados.map(estado => (
+                            <option key={estado} value={estado}>{estado}</option>
+                        ))}
+                    </select>
+                </div>
+
                 {/* Test Selector */}
+
                 <div className="filter-group test-group">
                     <label>Seleccionar Caso:</label>
                     <select

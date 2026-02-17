@@ -488,8 +488,14 @@ button:disabled {
 
 /* Anchos específicos para evitar bailes */
 .area-select {
-  width: 220px;
+  width: 160px;
 }
+
+.estado-select {
+  width: 160px;
+}
+
+
 
 .test-group {
   flex: 1;
@@ -562,10 +568,12 @@ button:disabled {
   /* Resetear min-width en móvil */
 
   .area-select,
+  .estado-select,
   .main-select,
   .btn-action {
     width: 100% !important;
     height: 50px !important;
     /* Un poco más alto para tocar mejor */
   }
+
 }

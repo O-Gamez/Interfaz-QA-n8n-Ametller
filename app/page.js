@@ -45,6 +45,9 @@ export default function Home() {
 
   const [filterArea, setFilterArea] = useState('');
   const [uniqueAreas, setUniqueAreas] = useState([]);
+  const [filterEstado, setFilterEstado] = useState('');
+  const [uniqueEstados, setUniqueEstados] = useState([]);
+
 
   const [previewImages, setPreviewImages] = useState([]);
   const fileInputRef = useRef(null);
@@ -191,6 +194,11 @@ export default function Home() {
         // Extract Unique Areas for the filter logic
         const areas = [...new Set(data.map(item => item.Area).filter(Boolean))].sort();
         setUniqueAreas(areas);
+
+        // Extract Unique Estados for the filter logic
+        const estados = [...new Set(data.map(item => item.Estado).filter(Boolean))].sort();
+        setUniqueEstados(estados);
+
 
         showStatus(`✅ Lista actualizada (${data.length} tests)`, "success");
       } else {
@@ -346,6 +354,10 @@ export default function Home() {
       const pendingTest = testList.find(t => {
         // 1. Aplicar filtro de area si existe
         if (filterArea && t.Area !== filterArea) return false;
+
+        // 1.5. Aplicar filtro de estado si existe
+        if (filterEstado && t.Estado !== filterEstado) return false;
+
 
         // 2. Buscar uno que no esté completado (OK-UAT, OK-FINAL, BLOQUEADO)
         const estado = (t.Estado || "").toUpperCase().trim();
@@ -536,9 +548,13 @@ export default function Home() {
 
   // --- FILTERED LIST COMPUTATION ---
   const filteredTestList = testList.filter(t => {
-    if (!filterArea) return true;
-    return t.Area === filterArea;
+    // Apply area filter
+    if (filterArea && t.Area !== filterArea) return false;
+    // Apply estado filter
+    if (filterEstado && t.Estado !== filterEstado) return false;
+    return true;
   });
+
 
   // --- RENDER ---
   if (!isLoggedIn) {
@@ -562,7 +578,11 @@ export default function Home() {
         filterArea={filterArea}
         setFilterArea={setFilterArea}
         uniqueAreas={uniqueAreas}
+        filterEstado={filterEstado}
+        setFilterEstado={setFilterEstado}
+        uniqueEstados={uniqueEstados}
         onChangeTester={handleChangeTester}
+
       />
 
 
