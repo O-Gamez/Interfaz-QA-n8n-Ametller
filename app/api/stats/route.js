@@ -14,6 +14,7 @@ export async function GET(request) {
     const data = await res.json();
     return Response.json(data);
   } catch (error) {
-    return Response.json({ ok: 0, ko: 0, bloqueado: 0, pendiente: 0 });
+    return Response.json({ readyToTest: 0, working: 0, okUat: 0, okFinal: 0, ko: 0, bloqueado: 0, pendiente: 0 });
   }
+
 }

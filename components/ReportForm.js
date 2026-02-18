@@ -313,12 +313,14 @@ export default function ReportForm({
                     <div className="input-header"><div className="label">Estado *</div></div>
                     <select name="estado" value={formData.estado} onChange={handleChange} disabled={!caso} style={{ height: '48px' }}>
                         <option value="">Seleccionar...</option>
+                        <option value="WORKING">🔧 WORKING</option>
                         <option value="Ready to test">📝 Ready to test</option>
                         <option value="OK-UAT">✅ OK-UAT</option>
                         <option value="OK-FINAL">✨ OK-FINAL</option>
                         <option value="KO">❌ KO</option>
                         <option value="BLOQUEADO">⛔ BLOQUEADO</option>
                     </select>
+
 
                 </div>
                 <div className="input-group">

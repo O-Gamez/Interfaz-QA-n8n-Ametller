@@ -128,8 +128,10 @@ export default function TestSelector({
                             if (estado === "OK-UAT") icono = "✅";
                             if (estado === "OK-FINAL") icono = "✨";
                             if (estado === "READY TO TEST") icono = "📝";
+                            if (estado === "WORKING") icono = "🔧";
                             if (estado === "KO") icono = "❌";
                             if (estado === "BLOQUEADO") icono = "⛔";
+
 
                             return (
                                 <option key={t.ID} value={t.ID}>

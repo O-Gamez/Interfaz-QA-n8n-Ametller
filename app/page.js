@@ -248,21 +248,23 @@ export default function Home() {
       const data = await res.json();
 
       setStatsData({
-        labels: ['Ready to test', 'OK-UAT', 'OK-FINAL', 'KO', 'Bloqueado', 'Pendiente'],
+        labels: ['Ready to test', 'WORKING', 'OK-UAT', 'OK-FINAL', 'KO', 'Bloqueado', 'Pendiente'],
         datasets: [{
           data: [
             data.readyToTest || data['Ready to test'] || 0, 
+            data.working || data['WORKING'] || 0,
             data.okUat || data['OK-UAT'] || 0, 
             data.okFinal || data['OK-FINAL'] || 0, 
             data.ko || 0, 
             data.bloqueado || 0,
             data.pendiente || 0
           ],
-          backgroundColor: ['#3b82f6', '#10b981', '#059669', '#ef4444', '#f59e0b', '#6b7280'],
+          backgroundColor: ['#3b82f6', '#f97316', '#10b981', '#059669', '#ef4444', '#f59e0b', '#6b7280'],
           borderColor: '#18181b',
           borderWidth: 2,
         }],
       });
+
 
 
       setShowStats(true);
