@@ -329,7 +329,13 @@ export default function ReportForm({
                 </div>
             </div>
 
+            <div className="input-group" style={{ marginTop: '20px' }}>
+                <div className="input-header"><div className="label">Comentarios Viseo</div></div>
+                <textarea name="comentariosViseo" value={formData.comentariosViseo} onChange={handleChange} disabled={!caso} placeholder="Añade comentarios de Viseo..." style={{ minHeight: '80px' }} />
+            </div>
+
             <div className="actions" style={{ justifyContent: 'flex-end' }}>
+
                 <button className="btn-primary" onClick={enviar} disabled={!caso || uploading}>
                     {uploading ? "⏳ Procesando..." : "Enviar Resultado ✨"}
                 </button>

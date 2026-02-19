@@ -69,8 +69,10 @@ export default function Home() {
     resultado: '',
     estado: '',
     evidencias: '',
-    notas: ''
+    notas: '',
+    comentariosViseo: ''
   });
+
 
   // --- PERSISTENCIA ---
   useEffect(() => {
@@ -468,8 +470,10 @@ export default function Home() {
         resultado: casoData["Resultado Obtenido"] || '',
         estado: casoData["Estado"] || '',
         evidencias: textNotes,
-        notas: casoData["Notas"] || ''
+        notas: casoData["Notas"] || '',
+        comentariosViseo: casoData["Comentarios Viseo"] || ''
       });
+
 
       setPreviewImages(existingPreviews);
 
@@ -547,7 +551,9 @@ export default function Home() {
         "Estado Historial": estadoHistorial,
         Evidencias: evidenciasFinales,
         Notas: formData.notas,
+        "Comentarios Viseo": formData.comentariosViseo,
         Tester: testerHistorial,
+
         Fecha: fechaHistorial,
         device: device // Also send device so backend knows where to write
 
@@ -582,7 +588,8 @@ export default function Home() {
       localStorage.removeItem("currentPreviews");
 
       setPreviewImages([]);
-      setFormData({ resultado: '', estado: '', evidencias: '', notas: '' });
+      setFormData({ resultado: '', estado: '', evidencias: '', notas: '', comentariosViseo: '' });
+
 
       // No recargar lista inmediatamente para evitar que n8n sobrescriba el estado local
       // La lista se actualizará cuando se cambie de dispositivo o manualmente
